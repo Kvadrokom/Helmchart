@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "my-app-chart.fullname" . }}-fluent-bit-config
+data:
+  fluent-bit.conf: |
+    [INPUT]
+    {{- toYaml .Values.fluentBit.config.input | nindent 4 }}
+
+    [OUTPUT]
+    {{- toYaml .Values.fluentBit.config.output | nindent 4 }}

@@ -1,0 +1,7 @@
+apiVersion: v2
+name: my-app-chart
+description: Helm chart for deploying Python app with Fluent Bit and Prometheus
+type: application
+version: 0.1.0
+appVersion: 1.0.0
+

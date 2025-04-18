@@ -1,0 +1,58 @@
+global:
+  imageRegistry: "192.168.1.8:8343"
+  imagePullSecrets:
+    - name: regcred  # Имя секрета с учетными данными
+pythonApp:
+  image:
+    repository: "reminder-v0.2"
+    tag: "latest"
+    pullPolicy: "IfNotPresent"
+fluentBit:
+  config:
+    input:
+      Name: tail
+      Path: /var/log/reminder.log
+      Tag: reminder.log
+      Refresh_Interval: 5
+    output:
+      Name: opensearch
+      Match: "*"
+      Host: 192.168.1.7
+      Port: 9200
+      Index: fluentbit-logs
+      HTTP_User: admin
+      HTTP_Passwd: Rem@@4825788
+      Logstash_Format: Off
+      Suppress_Type_Name: true
+      tls: On
+      tls.verify: Off
+  image:
+    repository: "cr.fluentbit.io/fluent/fluent-bit"
+    tag: "2.1.0"
+    pullPolicy: "IfNotPresent"
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: chart.example.local
+      paths:
+        - path: "/"
+          pathType: Prefix
+prometheus:
+  enabled: true
+  externalAccessEnabled: true
+service:
+  port: 80
+serviceAccount:
+  create: true
+  name: my-app-chart-serviceaccount
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+# Учетные данные для приватного registry
+imageCredentials:
+  username: admin
+  password: "36e5e990-b688-455d-8223-c0f053725feb"  # Ваш пароль
+  registry: "192.168.1.8:8343"
