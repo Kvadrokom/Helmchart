@@ -34,7 +34,7 @@ spec:
           volumeMounts:
             - name: logs
               mountPath: /var/log
-          env:
+          {% comment %} env:
             - name: REGISTRY_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -44,7 +44,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "my-app-chart.fullname" . }}-secrets
-                  key: REGISTRY_PASSWORD
+                  key: REGISTRY_PASSWORD {% endcomment %}
           resources:
             requests:
               cpu: 100m
