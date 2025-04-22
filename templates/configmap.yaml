@@ -5,7 +5,7 @@ metadata:
 data:
   fluent-bit.conf: |
     [INPUT]
-    {{- toYaml .Values.fluentBit.config.input | nindent 4 }}
+    {{- toYaml .Values.fluentBit.config.input | nindent 8 }}
 
     [OUTPUT]
-    {{- toYaml .Values.fluentBit.config.output | nindent 4 }}
+    {{- toYaml .Values.fluentBit.config.output | nindent 8 }}
