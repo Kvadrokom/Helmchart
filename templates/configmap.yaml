@@ -4,8 +4,24 @@ metadata:
   name: {{ include "my-app-chart.fullname" . }}-fluent-bit-config
 data:
   fluent-bit.conf: |
-[INPUT]
-    {{- toYaml .Values.fluentBit.config.input | nindent 4 }}
+    [SERVICE]
+        Log_Level info
 
-[OUTPUT]
-    {{- toYaml .Values.fluentBit.config.output | nindent 4 }}
+    [INPUT]
+        Name {{ .Values.fluentBit.config.input.Name }}
+        Path {{ .Values.fluentBit.config.input.Path }}
+        Tag {{ .Values.fluentBit.config.input.Tag }}
+        Refresh_Interval {{ .Values.fluentBit.config.input.Refresh_Interval }}
+
+    [OUTPUT]
+        Name {{ .Values.fluentBit.config.output.Name }}
+        Match {{ .Values.fluentBit.config.output.Match }}
+        Host {{ .Values.fluentBit.config.output.Host }}
+        Port {{ .Values.fluentBit.config.output.Port }}
+        Index {{ .Values.fluentBit.config.output.Index }}
+        HTTP_User {{ .Values.fluentBit.config.output.HTTP_User }}
+        HTTP_Passwd {{ .Values.fluentBit.config.output.HTTP_Passwd }}
+        Logstash_Format {{ .Values.fluentBit.config.output.Logstash_Format }}
+        Suppress_Type_Name {{ .Values.fluentBit.config.output.Suppress_Type_Name }}
+        tls {{ .Values.fluentBit.config.output.tls }}
+        tls.verify {{ .Values.fluentBit.config.output.tls.verify }}
