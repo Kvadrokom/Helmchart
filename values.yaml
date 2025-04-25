@@ -25,7 +25,7 @@ fluentBit:
       Logstash_Format: Off
       Suppress_Type_Name: true
       tls: On
-      tls.verify: Off
+      tls_verify: Off
   image:
     repository: "cr.fluentbit.io/fluent/fluent-bit"
     tag: "2.1.0"

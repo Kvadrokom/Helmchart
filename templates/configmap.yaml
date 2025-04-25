@@ -24,4 +24,4 @@ data:
         Logstash_Format {{ .Values.fluentBit.config.output.Logstash_Format }}
         Suppress_Type_Name {{ .Values.fluentBit.config.output.Suppress_Type_Name }}
         tls {{ .Values.fluentBit.config.output.tls }}
-        tls.verify {{ .Values.fluentBit.config.output.tls.verify }}
+        tls.verify {{ .Values.fluentBit.config.output.tls_verify }}
