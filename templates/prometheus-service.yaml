@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "my-app-chart.fullname" . }}-prometheus
+spec:
+  ports:
+    - port: 9090
+      targetPort: 9090
+  selector:
+    app.kubernetes.io/name: {{ include "my-app-chart.fullname" . }}

@@ -19,9 +19,19 @@ spec:
         app.kubernetes.io/name: {{ include "my-app-chart.fullname" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+  template:
+    spec:
       containers:
         - name: prometheus
           image: "prom/prometheus:v2.36.1"
+          volumeMounts:
+            - name: config
+              mountPath: /etc/prometheus/prometheus.yml
+              subPath: prometheus.yml
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "my-app-chart.fullname" . }}-prometheus-config
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
