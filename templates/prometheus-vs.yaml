@@ -1,12 +1,11 @@
-{{- if .Values.prometheus.enabled }}
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: {{ include "my-app-chart.fullname" . }}-vs
-  namespace: {{ .Release.Namespace | quote }}
+  name: prometheus-vs
+  namespace: default
 spec:
   hosts:
-    - "{{ .Values.prometheus.hostPattern }}"
+    - "192.168.1.16.nip.io"
   gateways:
     - istio-ingressgateway
   http:
@@ -17,7 +16,6 @@ spec:
         uri: "/"
       route:
         - destination:
-            host: {{ include "my-app-chart.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
+            host: helmchart-my-app-chart-prometheus.default.svc.cluster.local
             port:
-              number: {{ .Values.service.port }}
-{{- end }}
+              number: 9090
