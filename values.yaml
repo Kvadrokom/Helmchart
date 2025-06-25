@@ -1,7 +1,7 @@
 global:
-  imageRegistry: "192.168.1.8:8343"
-  imagePullSecrets:
-    - name: regcred  # Имя секрета с учетными данными
+  imageRegistry: "192.168.1.8:8083"
+  #  imagePullSecrets:
+  # - name: regcred  # Имя секрета с учетными данными
 pythonApp:
   image:
     repository: "reminder-v0.2"
@@ -53,7 +53,7 @@ autoscaling:
   maxReplicas: 10
   targetCPUUtilizationPercentage: 80
 # Учетные данные для приватного registry
-imageCredentials:
-  username: admin
-  password: "36e5e990-b688-455d-8223-c0f053725feb"  # Ваш пароль
-  registry: "192.168.1.8:8343"
+#imageCredentials:
+# username: admin
+# password: "36e5e990-b688-455d-8223-c0f053725feb"  # Ваш пароль
+# registry: "192.168.1.8:8343"
